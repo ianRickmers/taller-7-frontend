@@ -19,6 +19,7 @@ main {
     border: 5px solid black;
     background:none;
     transition: 0.4s;
+    cursor: pointer;
 }
 .card:hover {
     transform: scale(1.05);
