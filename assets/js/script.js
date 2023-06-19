@@ -53,7 +53,7 @@ const typeColor = (name) => {
     }
 };
 
-//Descripción: Función que crea las tarjetas de los pokémon
+//Descripción: Función que crea las tarjetas de los pokémon y además las funciones de voltear la tarjeta
 //Entrada: Ninguna
 //Salida: Ninguna
 const pkmnCards = async () => {
@@ -62,12 +62,40 @@ const pkmnCards = async () => {
         const dataPokemones = await infoPokemon(data[i].url);
         main.innerHTML += 
         `<div class="card">
-            <img style="background-color:${typeColor(dataPokemones.types[0].type.name)}" src="${dataPokemones.sprites.other.dream_world.front_default}"alt="">
-            <div class="card-body">
-                <h1 class="card-title">${primeraLetraMayus(data[i].name)}</h1>
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-body">
+                        <img style="background-color:${typeColor(dataPokemones.types[0].type.name)}" src="${dataPokemones.sprites.other.dream_world.front_default}"alt="">
+                    </div>
+                </div>
+                <div class="card-back">
+                    <div class="card-body">
+                        <h1 class="card-title">${primeraLetraMayus(data[i].name)}</h1>
+                        <p class="card-text">Type: ${primeraLetraMayus(dataPokemones.types[0].type.name)}</p>
+                        <p class="card-text">Height: ${dataPokemones.height}</p>
+                        <p class="card-text">Weight: ${dataPokemones.weight}</p>
+                    </div>
+                </div>
             </div>
         </div>`;
     }
+    const cards = document.querySelectorAll('.card');
+
+    //Descripción: Función que agrega la clase flipping a la tarjeta y la clase flipped a la tarjeta que se le da click
+    //Entrada: Ninguna
+    //Salida: Ninguna
+    cards.forEach(function (card) {
+        card.addEventListener('click', function () {
+            card.classList.add('flipping');
+            card.classList.toggle('flipped');
+        });
+        card.addEventListener('transitionend', function () {
+            card.classList.remove('flipping');
+        });
+    });
+    
 };
+    
 
 pkmnCards();
+
