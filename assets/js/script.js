@@ -38,25 +38,28 @@ function primeraLetraMayus(str) {
 //Entrada: El nombre del tipo de pokémon
 //Salida: El color de fondo de la tarjeta
 const typeColor = (name) => {
-    if(name === "grass"){
-        return "#A7DB8D";
-    }else if(name === "fire"){
-        return "#F5AC78";
-    }else if(name === "water"){
-        return "#9DB7F5";
-    }else if(name === "bug"){
-        return "#C6D16E";
-    }else if(name === "flying"){
-        return "#C6B7F5"
-    }else if(name === "normal"){
-        return "#C6C6A7";
+    switch (name) {
+        case "grass":
+            return "#A7DB8D";
+        case "fire":
+            return "#F5AC78";
+        case "water":
+            return "#9DB7F5";
+        case "bug":
+            return "#C6D16E";
+        case "flying":
+            return "#C6B7F5";
+        case "normal":
+            return "#C6C6A7";
+        default:
+            break;
     }
 };
 
 //Descripción: Función que crea las tarjetas de los pokémon y además las funciones de voltear la tarjeta
 //Entrada: Ninguna
 //Salida: Ninguna
-const pkmnCards = async () => {
+const pkmnCards = (async () => {
     const data = await pokemones();
     for (let i = 0; i < 20; i++) {
         const dataPokemones = await infoPokemon(data[i].url);
@@ -94,8 +97,6 @@ const pkmnCards = async () => {
         });
     });
     
-};
+})();
     
-
-pkmnCards();
 
